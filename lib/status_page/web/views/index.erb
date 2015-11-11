@@ -1,0 +1,35 @@
+<h1>Status page</h1>
+
+<% summary = result.summary %>
+
+<table class="summary u-full-width">
+  <% summary.each do |group, metrics| %>
+    <tr>
+      <td colspan="4" class="group-name"><%= group %></td>
+    </tr>
+
+    <% metrics.each do |record|%>
+      <tr>
+        <% if record.platforms.empty? %>
+          <td class="key"><%= record.key %></td>
+          <td class="value wrong" colspan="3"><pre>Information not found</pre></td>
+        <% else %>
+          <td class="key" rowspan="<%= result.platforms.size %>"><%= record.key %></td>
+          <% first_platform = record.platforms.shift %>
+          <td class="platform"><a href="<%= root_path %>history/<%= first_platform.key %>/<%= group %>/<%= record.key %>"><%= first_platform.key %></a></td>
+          <td class="value <%= first_platform.status %>"><pre><%= first_platform.value %></pre></td>
+          <td class="time"><%= first_platform.time %></td>
+        <% end %>
+      </tr>
+
+      <% record.platforms.each do |platform| %>
+        <tr>
+          <td class="platform"><a href="<%= root_path %>history/<%= platform.key %>/<%= group %>/<%= record.key %>"><%= platform.key %></a></td>
+          <td class="value <%= platform.status %>"><pre><%= platform.value %></pre></td>
+          <td class="time"><%= platform.time %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+</table>
+

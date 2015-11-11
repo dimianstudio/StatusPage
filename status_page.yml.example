@@ -1,0 +1,25 @@
+general:
+  operation_system: true
+  cpu: true
+  ram: true
+  file_system: true
+software:
+  rbenv: true
+  ruby: { name: 'Ruby', command: 'ruby -v' }
+  mysql: true
+  mysqlimport: true
+  mongo: mongo --version
+  redis: redis-server --version
+  'redis-cli': true
+  nginx: true
+  passenger: true
+  ffmpeg: ffmpeg -version
+processes:
+  mysql: { rails: true, process: 'mysqld' }
+  mongo: { rails: true, process: 'mongod' }
+  redis: { rails: true, process: 'redis-server' }
+  nginx: true
+  passenger: true
+  sidekiq: { rails: true, pid: true }
+checks:
+  mysql_privileges: { metric_class: 'StatusPage::Metric::Custom::MysqlPrivileges' }

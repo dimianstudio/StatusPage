@@ -1,0 +1,52 @@
+body {
+  padding: 30px;
+}
+
+table {
+  margin-top: 30px;
+}
+
+table th, table td {
+  border-color: #95a5a6;
+}
+
+table td pre {
+  margin: 0;
+  padding: 0;
+}
+
+table.summary td.key, table.history td.time {
+  background-color: #DADFE1;
+  padding-left: 15px;
+  width: 15%;
+}
+
+table.summary td.group-name {
+  background-color: #6c7a89;
+  color: #fff;
+  padding-left: 15px;
+  text-transform: uppercase;
+}
+
+table.summary td.platform {
+  padding-left: 15px;
+  background-color: #ECF0F1;
+}
+
+table.summary td.value {
+  background-color: #c8f7c5;
+}
+
+table.summary td.value.wrong {
+  background-color: #FDE3A7;
+}
+
+table.summary td.time {
+  text-align: center;
+  background-color: #fafafa;
+  padding: inherit;
+}
+
+h2 {
+  margin: 20px 0 0 0;
+}

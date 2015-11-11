@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "status_page"
+require 'yaml'
+
+StatusPage.configure do |config|
+  config.redis = { namespace: 'status_page', url: 'redis://localhost:6379/0' }
+  config.metrics_set = YAML.load(File.read(File.expand_path('../../status_page.yml.example',  __FILE__)))
+end
+
+require "status_page/client"
+require "status_page/web_results"
+
+# You can add fixtures and/or initialization code here to make experimenting
+# with your gem easier. You can also use a different console, if you like.
+
+# (If you use this, don't forget to add pry to your Gemfile!)
+# require "pry"
+# Pry.start
+
+require "irb"
+IRB.start

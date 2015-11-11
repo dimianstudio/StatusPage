@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "status_page"
+require 'yaml'
+
+StatusPage.configure do |config|
+  config.redis = { namespace: 'status_page', url: 'redis://localhost:6379/0' }
+  config.metrics_set = YAML.load(File.read(File.expand_path('../../status_page.yml.example',  __FILE__)))
+end
+
+require "status_page/web"
+
+StatusPage::Web.run!

@@ -1,0 +1,14 @@
+<a href="<%= root_path %>">Back</a>
+
+<h2><%= key %></h2>
+<p>Last 50 records</p>
+
+<table class="history u-full-width">
+  <% records.each do |record| %>
+    <tr>
+      <td class="time"><%= record.time %></td>
+      <td><pre><%= record.value %></pre></td>
+    </tr>
+  <% end %>
+</table>
+
