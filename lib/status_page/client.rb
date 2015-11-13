@@ -3,8 +3,7 @@ require 'active_support/inflector'
 require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/hash/keys'
 
-METRICS_DIR = File.expand_path('../',  __FILE__)
-Dir["#{METRICS_DIR}/**/*.rb"].each { |f| require f }
+Dir["#{File.expand_path('../',  __FILE__)}/**/*.rb"].each { |f| require f }
 
 module StatusPage
   class Client

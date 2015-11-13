@@ -3,16 +3,8 @@ require 'json'
 require 'status_page/redis_connection'
 
 module StatusPage
-
   DEFAULT_METRICS_SET = { 'general' => { 'os' => true, 'cpu' => true, 'ram' => true, 'file_system' => true }}
 
-  # Configuration for StatusPage, use like:
-  #
-  #   StatusPage.configure do |config|
-  #     config.redis = { :namespace => 'myapp', :size => 25, :url => 'redis://myhost:8877/0' }
-  #     config.metrics_set = YAML.load(File.read(File.expand_path('../../status_page.yml.example',  __FILE__)))
-  #   end
-  #
   def self.configure
     yield self
   end

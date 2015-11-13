@@ -1,8 +1,8 @@
 # StatusPage
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/status_page`. To experiment with that code, run `bin/console` for an interactive prompt.
+Simple status page which shows info about CPU, RAM, OS ...
 
-TODO: Delete this and the text above, and describe your gem
+![Screenshot](https://raw.githubusercontent.com/dimianstudio/StatusPage/master/images/screenshot.png)
 
 ## Installation
 
@@ -20,9 +20,6 @@ Or install it yourself as:
 
     $ gem install status_page
 
-## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 
