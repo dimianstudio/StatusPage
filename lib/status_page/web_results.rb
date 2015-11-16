@@ -11,7 +11,7 @@ module StatusPage
       end
 
       def status
-        return 'wrong' if value.to_s =~ /not\s+installed$/
+        return 'wrong' if value.to_s =~ /not\s+installed$/ || value.to_s =~ /is\s+not\s+running/
         'correct'
       end
     end
@@ -33,8 +33,8 @@ module StatusPage
         results[group] = []
 
         metrics.each do |key, _|
-          ruby_record = StatusPage.redis { |conn| conn.lrange("ruby/#{group}/#{key}", -2, -1).first }
-          jruby_record = StatusPage.redis { |conn| conn.lrange("jruby/#{group}/#{key}", -2, -1).first }
+          ruby_record = StatusPage.redis { |conn| conn.lrange("ruby/#{group}/#{key}", 0, 0).first }
+          jruby_record = StatusPage.redis { |conn| conn.lrange("jruby/#{group}/#{key}", 0, 0).first }
 
           values = [ prepare_value(:ruby, ruby_record), prepare_value(:jruby, jruby_record) ].compact
           results[group] << OpenStruct.new(key: key, platforms: values)
@@ -46,11 +46,11 @@ module StatusPage
 
     def history(key)
       results = []
-      size_of_set = StatusPage.redis { |conn| conn.llen(key) }
 
-      StatusPage.redis { |conn| conn.lrange(key, (size_of_set - 50), -1) }.reverse.each do |record|
+      StatusPage.redis { |conn| conn.lrange(key, 0, 50) }.each do |record|
         results << prepare_value(key, record)
       end
+
       results
     end
 

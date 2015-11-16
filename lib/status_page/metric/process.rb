@@ -1,26 +1,15 @@
+require File.expand_path('../software',  __FILE__)
+
 module StatusPage
   module Metric
-    class Process < Base
-      def initialize(options)
-        @options = options
-      end
-
-      def name
-        @options[:name]
-      end
-
-      def command
-        @options[:command]
-      end
-
+    class Process < Software
       def result
-        executable = command.scan(/(.*?)\s+/).flatten.first
-        check_command = `which #{executable}`
+        result = `#{command}`
 
-        if check_command =~ /not found/ || check_command.empty?
-          "#{name} not installed"
+        if result.split("\n").empty?
+          "#{name} is not running"
         else
-          `#{command}`.strip
+          { value: "running", raw_data: result }
         end
       end
     end

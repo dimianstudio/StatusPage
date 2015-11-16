@@ -1,7 +1,8 @@
 require 'sinatra/base'
 require 'erb'
-require File.expand_path('../',  __FILE__) + '/web_results'
-require File.expand_path('../',  __FILE__) + '/web_helpers'
+require File.expand_path('../client',  __FILE__)
+require File.expand_path('../web_results',  __FILE__)
+require File.expand_path('../web_helpers',  __FILE__)
 
 module StatusPage
   class Web < Sinatra::Base
@@ -14,6 +15,11 @@ module StatusPage
 
     get '/' do
       erb :index, locals: { result: WebResults.new }
+    end
+
+    get '/collect_metrics' do
+      Client.new.collect
+      redirect back
     end
 
     get '/history/*' do
