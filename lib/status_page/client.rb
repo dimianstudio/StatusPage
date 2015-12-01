@@ -24,8 +24,10 @@ module StatusPage
     private
 
     def metric_defined?(constant_name)
-      constant_name.constantize rescue nil
-      Object.const_defined?(constant_name)
+      constant_name.constantize
+      true
+    rescue
+      false
     end
 
     def __visit_general(metrics)
