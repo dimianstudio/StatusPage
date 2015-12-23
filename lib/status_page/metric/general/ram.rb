@@ -7,7 +7,7 @@ module StatusPage
         end
 
         def result_for_linux
-          `cat /proc/meminfo | grep MemTotal`.grep(/MemTotal\:/)
+          `cat /proc/meminfo | grep MemTotal`.gsub(/MemTotal\:/, '').strip
         end
       end
     end
