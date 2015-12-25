@@ -17,7 +17,13 @@ table th, table td {
 table td pre {
   margin: 0;
   padding: 0;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
+
 
 table.summary td.key, table.history td.time {
   background-color: #DADFE1;
@@ -49,6 +55,7 @@ table.summary td.time {
   text-align: center;
   background-color: #fafafa;
   padding: inherit;
+  width: 15%;
 }
 
 h2 {
