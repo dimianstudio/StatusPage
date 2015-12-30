@@ -1,8 +1,8 @@
 require 'sinatra/base'
 require 'erb'
-require File.expand_path('../client',  __FILE__)
-require File.expand_path('../web_results',  __FILE__)
-require File.expand_path('../web_helpers',  __FILE__)
+require 'status_page/client'
+require 'status_page/web_results'
+require 'status_page/web_helpers'
 
 module StatusPage
   class Web < Sinatra::Base

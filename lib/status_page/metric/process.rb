@@ -1,4 +1,4 @@
-require File.expand_path('../software',  __FILE__)
+require 'status_page/metric/software'
 
 module StatusPage
   module Metric

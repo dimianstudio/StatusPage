@@ -1,3 +1,5 @@
+require 'status_page/metric/base'
+
 module StatusPage
   module Metric
     class Software < Base
