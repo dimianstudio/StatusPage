@@ -3,7 +3,12 @@ require 'active_support/inflector'
 require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/hash/keys'
 
-Dir["#{File.expand_path('../',  __FILE__)}/**/*.rb"].each { |f| require f }
+require 'status_page/metric/general/cpu'
+require 'status_page/metric/general/file_system'
+require 'status_page/metric/general/operation_system'
+require 'status_page/metric/general/ram'
+require 'status_page/metric/process'
+require 'status_page/metric/software'
 
 module StatusPage
   class Client
@@ -63,9 +68,10 @@ module StatusPage
           when String
             { name: metric, command: value }
           when Hash
-            metric_class = value.delete('metric_class') if value['metric_class'].present?
-            value['command'] = block.call(value.delete('process')) if value['process'].present?
-            { name: metric }.merge(value.symbolize_keys)
+            opts = value.clone
+            metric_class = opts.delete('metric_class') if opts['metric_class'].present?
+            opts['command'] = block.call(opts.delete('process')) if opts['process'].present?
+            { name: metric }.merge(opts.symbolize_keys)
         end
 
         next unless metric_defined?(metric_class)
