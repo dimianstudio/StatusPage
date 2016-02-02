@@ -7,7 +7,7 @@ module StatusPage
         result = `#{command}`
 
         if result.split("\n").empty?
-          "#{name} is not running"
+          { value: "#{name} is not running", status: 'error' }
         else
           { value: "running", raw_data: result }
         end

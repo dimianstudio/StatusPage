@@ -20,7 +20,7 @@
           <td class="key" rowspan="<%= result.platforms.size %>"><%= record.key %></td>
           <% first_platform = record.platforms.shift %>
           <td class="platform"><a href="<%= root_path %>history/<%= first_platform.key %>/<%= group %>/<%= record.key %>"><%= first_platform.key %></a></td>
-          <td class="value <%= first_platform.status %>"><pre><%= first_platform.value %></pre></td>
+          <td class="value <%= first_platform.status %>"><pre><%= first_platform.value.truncate(500) %></pre></td>
           <td class="time"><%= first_platform.time %></td>
         <% end %>
       </tr>
@@ -28,11 +28,10 @@
       <% record.platforms.each do |platform| %>
         <tr>
           <td class="platform"><a href="<%= root_path %>history/<%= platform.key %>/<%= group %>/<%= record.key %>"><%= platform.key %></a></td>
-          <td class="value <%= platform.status %>"><pre><%= platform.value %></pre></td>
+          <td class="value <%= platform.status %>"><pre><%= platform.value.truncate(500) %></pre></td>
           <td class="time"><%= platform.time %></td>
         </tr>
       <% end %>
     <% end %>
   <% end %>
 </table>
-

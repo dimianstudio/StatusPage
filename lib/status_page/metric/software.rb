@@ -20,7 +20,7 @@ module StatusPage
         check_command = `which #{executable}`
 
         if check_command =~ /not found/ || check_command.empty?
-          "#{name} not installed"
+          { value: "#{name} not installed", status: 'error' }
         else
           `#{command}`.strip
         end

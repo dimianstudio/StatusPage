@@ -6,13 +6,19 @@ module StatusPage
     class Value
       attr_reader :key, :value, :time
 
-      def initialize(key, value, time)
-        @key, @value, @time = key, value, time
+      def initialize(key, record)
+        @key = key
+        @record = record
+        @value = record['value'].to_s
+        @time = Time.parse(record['time']).to_s
       end
 
       def status
-        return 'wrong' if value.to_s =~ /not\s+installed$/ || value.to_s =~ /is\s+not\s+running/
-        'correct'
+        case @record['status']
+          when 'error' then 'wrong'
+          else
+            'correct'
+        end
       end
     end
 
@@ -58,8 +64,7 @@ module StatusPage
 
     def prepare_value(key, json)
       return unless json
-      record = JSON.parse(json)
-      Value.new(key, record['value'], Time.parse(record['time']).to_s)
+      Value.new(key, JSON.parse(json))
     end
   end
 end
