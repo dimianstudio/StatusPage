@@ -94,6 +94,7 @@ module StatusPage
 
       StatusPage.redis do |conn|
         conn.lpush("#{platform}/#{name}", JSON.dump(hash.merge(time: Time.now.utc)))
+        conn.ltrim("#{platform}/#{name}", 0, StatusPage.history_size)
       end
     end
   end

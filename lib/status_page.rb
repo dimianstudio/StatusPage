@@ -4,6 +4,7 @@ require 'status_page/redis_connection'
 
 module StatusPage
   DEFAULT_METRICS_SET = { 'general' => { 'os' => true, 'cpu' => true, 'ram' => true, 'file_system' => true }}
+  DEFAULT_HISTORY_SIZE = 50
 
   def self.configure
     yield self
@@ -32,5 +33,13 @@ module StatusPage
 
   def self.metrics_set=(hash)
     @metrics_set = hash
+  end
+
+  def self.history_size
+    @history_size || DEFAULT_HISTORY_SIZE
+  end
+
+  def self.history_size=(size)
+    @history_size = size
   end
 end
